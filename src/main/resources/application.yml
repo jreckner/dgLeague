@@ -1,0 +1,17 @@
+server:
+  port: ${port:1981}
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/dgleague_dev
+    username: dgadmin
+    password: dg@dmin
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: create-drop
+          import_files: import.sql

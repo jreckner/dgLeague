@@ -1,0 +1,104 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.5.RELEASE")
+    }
+}
+
+plugins {
+    id 'net.saliman.cobertura' version '2.2.8'
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'spring-boot'
+apply plugin: 'codenarc'
+apply plugin: 'maven'
+apply plugin: 'project-report'
+
+jar {
+    baseName = 'dgLeague'
+    version =  '1.0.0-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.4'
+
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest'
+    runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
+
+    // tag::jetty[]
+    compile("org.springframework.boot:spring-boot-starter-web") {
+        exclude module: "spring-boot-starter-tomcat"
+    }
+    compile("org.springframework.boot:spring-boot-starter-jetty")
+    // end::jetty[]
+    // tag::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework:spring-test'
+    testCompile 'org.spockframework:spock-spring:1.0-groovy-2.4'
+    testCompile("junit:junit")
+}
+
+tasks.withType(CodeNarc) {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+// CodeNarc settings
+codenarc {
+    toolVersion = '0.24.1'
+}
+
+codenarcMain {
+    enabled = true
+    maxPriority1Violations = 0
+    maxPriority2Violations = 0
+    maxPriority3Violations = 0
+    configFile = file('config/codenarc/Rules.groovy')
+}
+
+codenarcTest {
+    enabled = false
+}
+
+cobertura {
+    coverageFormats = ['html', 'xml']
+    coverageIgnoreTrivial = true
+    coverageReportDir = new File("$buildDir/reports/cobertura")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.7'
+}
+
+clean {
+    delete fileTree(dir: "$buildDir/reports/cobertura")
+    delete 'logs/'
+}
+
+// Tells Gradle to automatically execute the cobertura task after the test task has completed.
+test.finalizedBy(project.tasks.cobertura)
+// Tells Gradle to automatically execute the codenarc task after the test task has completed.
+test.finalizedBy(project.tasks.check)
+
+defaultTasks 'clean', 'test', 'build'
