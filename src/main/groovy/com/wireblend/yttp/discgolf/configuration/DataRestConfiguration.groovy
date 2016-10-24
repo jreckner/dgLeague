@@ -1,6 +1,6 @@
 package com.wireblend.yttp.discgolf.configuration
 
-import com.wireblend.yttp.discgolf.domain.PlayerEntity
+import com.wireblend.yttp.discgolf.domain.entity.PlayerEntity
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration
