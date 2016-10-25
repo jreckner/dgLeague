@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 buildscript {
     repositories {
         mavenCentral()
@@ -20,9 +22,33 @@ apply plugin: 'codenarc'
 apply plugin: 'maven'
 apply plugin: 'project-report'
 
+archivesBaseName = 'dgleague-service'
+group = 'com.wireblend.yttp.discgolf'
+version = '0.1.0-SNAPSHOT'
+description = 'Disc Golf League Service'
+
+bootRun {
+    /**
+     * Important: bootRun will not processResources unless addResources is set to false. See:
+     * http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/html/build-tool-plugins-gradle-plugin.html#build-tool-plugins-gradle-running-applications
+     */
+    addResources = false
+}
+
+processResources {
+    filesMatching("**/application.yml") {
+        expand([
+                name       : project.name,
+                version    : project.version,
+                description: project.description,
+                buildDate  : new SimpleDateFormat('yyyy-MM-dd_HH-mm-ss').format(new Date()),
+                commitsh   : ("git rev-parse HEAD".execute().text).trim()
+        ])
+    }
+}
+
 jar {
-    baseName = 'dgLeague'
-    version =  '0.1.0-SNAPSHOT'
+    baseName = "${archivesBaseName}"
 }
 
 repositories {
@@ -50,6 +76,12 @@ dependencies {
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
+    // tag::security[]
+    //compile("org.springframework.boot:spring-boot-starter-security")
+    // end::security[]
+
+    compile 'io.springfox:springfox-swagger2:2.1.2'
+    compile 'io.springfox:springfox-swagger-ui:2.1.2'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.springframework:spring-test'
