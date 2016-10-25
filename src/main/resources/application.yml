@@ -13,12 +13,11 @@ info:
 
 # Logging Configuration
 logging.file: dgleague.log
-logging.level.: INFO
+logging.level.: WARN
 logging:
   level:
-    # org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainer: INFO
-    # groovyx.net.http.RESTClient: DEBUG
-    com.wireblend.yttp: INFO
+    org.springframework.boot.context.embedded.jetty.JettyEmbeddedServletContainer: INFO
+    com.recknerd.discgolf: INFO
 
 # Database Configuration
 spring:

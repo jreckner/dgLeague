@@ -23,7 +23,7 @@ apply plugin: 'maven'
 apply plugin: 'project-report'
 
 archivesBaseName = 'dgleague-service'
-group = 'com.wireblend.yttp.discgolf'
+group = 'com.recknerd.discgolf'
 version = '0.1.0-SNAPSHOT'
 description = 'Disc Golf League Service'
 
