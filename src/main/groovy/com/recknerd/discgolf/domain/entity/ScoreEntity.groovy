@@ -13,7 +13,7 @@ import javax.persistence.UniqueConstraint
 
 @Entity(name = 'score')
 @Table(uniqueConstraints = [
-        @UniqueConstraint(columnNames = ['player_id', 'round_id'])
+        @UniqueConstraint(columnNames = ['team_id', 'round_id'])
 ])
 class ScoreEntity {
 
@@ -25,8 +25,8 @@ class ScoreEntity {
     Integer score
 
     @ManyToOne
-    @JoinColumn(name = 'player_id')
-    PlayerEntity player
+    @JoinColumn(name = 'team_id')
+    TeamEntity team
 
     @ManyToOne
     @JoinColumn(name = 'round_id')

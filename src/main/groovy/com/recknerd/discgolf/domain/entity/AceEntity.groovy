@@ -22,7 +22,7 @@ class AceEntity {
     @JoinColumn(name = 'player_id')
     PlayerEntity player
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = 'hole_id')
     HoleEntity hole
 }

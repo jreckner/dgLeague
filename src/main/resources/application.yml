@@ -23,7 +23,7 @@ logging:
 spring:
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://recknerd.com:5432/dgleague
+    url: jdbc:postgresql://localhost:5432/dgleague
     username: dgleague
     password: dgleague
 
@@ -41,7 +41,9 @@ swagger.version: 1.0
 swagger.title: Disc Golf League API
 swagger.description: A service to help organize and run a Disc Golf League.
 swagger.termsOfServiceUrl: http://recknerd.com
-swagger.contact: jon.reckner@gmail.com
+swagger.contactName: Jon Reckner
+swagger.contactEmail: jon.reckner@gmail.com
+swagger.contactUrl: http://recknerd.com
 swagger.license: MIT License
 swagger.licenseUrl: https://tldrlegal.com/license/mit-license
 

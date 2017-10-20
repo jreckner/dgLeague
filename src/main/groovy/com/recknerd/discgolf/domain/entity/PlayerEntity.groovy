@@ -6,8 +6,7 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
+import javax.persistence.ManyToMany
 import javax.persistence.OneToMany
 
 @Entity(name= 'player')
@@ -23,12 +22,8 @@ class PlayerEntity {
     @Column(unique = true, name = 'email', nullable = false)
     String email
 
-    @ManyToOne
-    @JoinColumn(name = 'team_id')
-    TeamEntity team
-
-    @OneToMany(mappedBy='player', cascade=CascadeType.ALL)
-    Set<ScoreEntity> scores
+    @ManyToMany(mappedBy="players", cascade=CascadeType.ALL)
+    Set<TeamEntity> teams
 
     @OneToMany(mappedBy='player', cascade=CascadeType.ALL)
     Set<AceEntity> aces

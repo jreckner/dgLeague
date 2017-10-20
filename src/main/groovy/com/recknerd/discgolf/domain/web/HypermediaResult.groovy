@@ -2,9 +2,11 @@ package com.recknerd.discgolf.domain.web
 
 class HypermediaResult {
 
-    String playerName
+    String teamName
 
-    String playerEmail
+    String[] teamNames
+
+    String[] teamEmails
 
     Integer finalScore
 

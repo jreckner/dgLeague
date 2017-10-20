@@ -5,22 +5,18 @@ buildscript {
         mavenCentral()
         jcenter()
     }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.8.RELEASE")
-    }
 }
 
 plugins {
     id 'net.saliman.cobertura' version '2.2.8'
+    id 'org.springframework.boot' version '1.5.8.RELEASE'
 }
 
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'spring-boot'
 apply plugin: 'codenarc'
 apply plugin: 'maven'
-apply plugin: 'project-report'
 
 archivesBaseName = 'dgleague-service'
 group = 'com.recknerd.discgolf'
@@ -65,7 +61,7 @@ dependencies {
 
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'org.springframework.boot:spring-boot-starter-data-rest'
-    runtime 'org.postgresql:postgresql:9.4.1211'
+    runtime 'org.postgresql:postgresql:9.4.1212'
 
     // tag::jetty[]
     compile("org.springframework.boot:spring-boot-starter-web") {
@@ -80,8 +76,8 @@ dependencies {
     //compile("org.springframework.boot:spring-boot-starter-security")
     // end::security[]
 
-    compile 'io.springfox:springfox-swagger2:2.1.2'
-    compile 'io.springfox:springfox-swagger-ui:2.1.2'
+    compile 'io.springfox:springfox-swagger2:2.7.0'
+    compile 'io.springfox:springfox-swagger-ui:2.7.0'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.springframework:spring-test'
@@ -98,7 +94,7 @@ tasks.withType(CodeNarc) {
 
 // CodeNarc settings
 codenarc {
-    toolVersion = '0.26.0'
+    toolVersion = '0.27.0'
 }
 
 codenarcMain {
@@ -120,7 +116,7 @@ cobertura {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.13'
+    gradleVersion = '4.2.1'
 }
 
 clean {
